@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>為您精選的專屬住宿提案 | trivago</title>
+    <style>
+        /* Trivago 品牌色系與基礎設定 */
+        :root {
+            --trivago-blue: #007fad;
+            --trivago-red: #c94a38;
+            --trivago-yellow: #f48f00;
+            --text-dark: #333333;
+            --text-gray: #666666;
+            --bg-light: #f7f9fa;
+        }
+        
+        * { box-sizing: border-box; font-family: 'Helvetica Neue', '微軟正黑體', Arial, sans-serif; }
+        body { margin: 0; padding: 0; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+        
+        /* 頂部導覽列 */
+        header { background: #fff; padding: 15px 20px; border-bottom: 2px solid #eaeaea; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        header h1 { margin: 0; font-size: 24px; color: var(--trivago-blue); letter-spacing: 1px; }
+
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+
+        /* 歡迎橫幅 */
+        .welcome-banner { background: linear-gradient(135deg, #007fad, #005a7d); color: white; padding: 40px 20px; border-radius: 12px; text-align: center; margin-bottom: 40px; box-shadow: 0 10px 20px rgba(0,127,173,0.2); }
+        .welcome-banner h2 { margin: 0 0 10px 0; font-size: 2.2rem; }
+        .welcome-banner p { font-size: 1.1rem; margin: 0; opacity: 0.9; }
+
+        /* 分類頁籤按鈕 */
+        .category-tabs { display: flex; gap: 15px; margin-bottom: 30px; flex-wrap: wrap; justify-content: center; }
+        .tab-btn { 
+            background: #fff; border: 2px solid #ddd; padding: 15px 25px; font-size: 1.1rem; 
+            font-weight: bold; color: var(--text-gray); border-radius: 30px; cursor: pointer; 
+            transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .tab-btn:hover { border-color: var(--trivago-blue); color: var(--trivago-blue); transform: translateY(-2px); }
+        .tab-btn.active { background: var(--trivago-blue); border-color: var(--trivago-blue); color: white; box-shadow: 0 5px 15px rgba(0,127,173,0.3); }
+
+        /* 銷售區塊內容 */
+        .tab-content { display: none; animation: fadeIn 0.5s; }
+        .tab-content.active { display: block; }
+        
+        .category-header { text-align: center; margin-bottom: 30px; }
+        .category-header h3 { color: var(--trivago-red); font-size: 1.8rem; margin-bottom: 10px; }
+        .category-header p { color: var(--text-gray); font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+
+        /* 飯店卡片設計 */
+        .hotel-list { display: flex; flex-direction: column; gap: 20px; }
+        .hotel-card { display: flex; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #eaeaea; transition: transform 0.3s; }
+        .hotel-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+        
+        .hotel-image { width: 300px; background-color: #ddd; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: bold; font-size: 1.2rem; background-size: cover; background-position: center; }
+        
+        .hotel-info { padding: 25px; flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .hotel-title-wrap { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .hotel-title-wrap h4 { margin: 0; font-size: 1.5rem; color: var(--text-dark); }
+        .rating { background: #007fad; color: white; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.9rem; }
+        
+        .hotel-desc { color: var(--text-gray); margin-bottom: 15px; flex-grow: 1; }
+        .perks { list-style: none; padding: 0; margin: 0 0 20px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+        .perks li { background: #f0f7fa; color: var(--trivago-blue); padding: 5px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: bold; }
+
+        .price-action { display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #eee; padding-top: 15px; }
+        .price-block .label { font-size: 0.9rem; color: var(--text-gray); }
+        .price-block .amount { font-size: 1.8rem; font-weight: bold; color: var(--trivago-red); margin: 0; }
+        
+        .btn-book { background-color: #2e7d32; color: white; border: none; padding: 12px 30px; font-size: 1.1rem; font-weight: bold; border-radius: 6px; cursor: pointer; transition: background 0.3s; text-decoration: none; display: inline-block; }
+        .btn-book:hover { background-color: #1b5e20; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* RWD */
+        @media (max-width: 768px) {
+            .hotel-card { flex-direction: column; }
+            .hotel-image { width: 100%; height: 200px; }
+            .price-action { flex-direction: column; align-items: stretch; gap: 15px; }
+            .btn-book { text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>trivago 聰明旅遊情報站</h1>
+    </header>
+
+    <div class="container">
+        
+        <div class="welcome-banner">
+            <h2>指南已寄出，您的專屬旅程即將展開！</h2>
+            <p>根據大數據分析，我們為您準備了以下 3 種不同情境的完美住宿提案，保證不踩雷。</p>
+        </div>
+
+        <!-- 類別切換按鈕 -->
+        <div class="category-tabs">
+            <button class="tab-btn active" onclick="switchCategory(event, 'scenery')">🛵 輕裝機車看風景</button>
+            <button class="tab-btn" onclick="switchCategory(event, 'fitness')">🏋️ 深層肌力與放鬆</button>
+            <button class="tab-btn" onclick="switchCategory(event, 'business')">💼 金融商務菁英</button>
+        </div>
+
+        <!-- 類別 1：輕裝機車看風景 -->
+        <div id="scenery" class="tab-content active">
+            <div class="category-header">
+                <h3>享受微風，一般機車也能抵達的絕美秘境</h3>
+                <p>不需要準備重型機車，騎著熟悉的白牌機車就能輕鬆抵達。為您精選擁有絕佳窗外風景，且具備安全、寬敞停車空間的優質民宿，讓您停好車就能徹底放空。</p>
+            </div>
+            
+            <div class="hotel-list">
+                <div class="hotel-card">
+                    <div class="hotel-image" style="background-color: #4CAF50;">[ 模擬圖片：海景民宿 ]</div>
+                    <div class="hotel-info">
+                        <div>
+                            <div class="hotel-title-wrap">
+                                <h4>北海岸 - 聽濤無邊際海景民宿</h4>
+                                <span class="rating">8.9 優秀</span>
+                            </div>
+                            <ul class="perks">
+                                <li>專屬室內機車位</li>
+                                <li>陽台直面太平洋</li>
+                                <li>台2線旁路況極佳</li>
+                            </ul>
+                            <p class="hotel-desc">騎乘沿海公路的最佳中繼站。把愛車安全停放後，坐在房內陽台就能聽著海浪聲放空，完美洗滌平日的疲憊。</p>
+                        </div>
+                        <div class="price-action">
+                            <div class="price-block">
+                                <span class="label">Trivago 全網最低價</span>
+                                <p class="amount">NT$ 2,850 <span style="font-size: 1rem; color: #888;">/晚</span></p>
+                            </div>
+                            <button class="btn-book" onclick="alert('導向 Trivago 比價轉換頁')">查看隱藏優惠</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 類別 2：深層肌力與放鬆 -->
+        <div id="fitness" class="tab-content">
+            <div class="category-header">
+                <h3>腿部訓練後的完美救贖：重訓與溫泉</h3>
+                <p>休假出遊也不想中斷訓練菜單？我們為注重體態的您，精選了配備高等級健身房（含深蹲架、自由重量區）的飯店，更附帶能舒緩腿部肌力訓練後痠痛的天然溫泉與 SPA。</p>
+            </div>
+            
+            <div class="hotel-list">
+                <div class="hotel-card">
+                    <div class="hotel-image" style="background-color: #FF9800;">[ 模擬圖片：高級健身房與溫泉 ]</div>
+                    <div class="hotel-info">
+                        <div>
+                            <div class="hotel-title-wrap">
+                                <h4>礁溪 - 活力泉源五星度假酒店</h4>
+                                <span class="rating">9.2 極致</span>
+                            </div>
+                            <ul class="perks">
+                                <li>專業級重訓室</li>
+                                <li>房內碳酸氫鈉泉</li>
+                                <li>高蛋白健康自助早餐</li>
+                            </ul>
+                            <p class="hotel-desc">飯店內建符合專業標準的健身中心，讓您的腿部訓練計畫不間斷。訓練後直接在房內享受深層溫泉放鬆，告別延遲性肌肉痠痛。</p>
+                        </div>
+                        <div class="price-action">
+                            <div class="price-block">
+                                <span class="label">Trivago 全網最低價</span>
+                                <p class="amount">NT$ 5,200 <span style="font-size: 1rem; color: #888;">/晚</span></p>
+                            </div>
+                            <button class="btn-book" onclick="alert('導向 Trivago 比價轉換頁')">查看隱藏優惠</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 類別 3：金融商務菁英 -->
+        <div id="business" class="tab-content">
+            <div class="category-header">
+                <h3>高鐵快閃，財務分析與簡報準備的安靜空間</h3>
+                <p>專為金融從業人員設計的商務提案。無論是需要安靜的環境準備新人分享會簡報，或是處理複雜的理賠業務與財務分析，這些具備高速網路與人體工學辦公桌的商旅是您的最佳後盾。</p>
+            </div>
+            
+            <div class="hotel-list">
+                <div class="hotel-card">
+                    <div class="hotel-image" style="background-color: #607D8B;">[ 模擬圖片：現代商務客房 ]</div>
+                    <div class="hotel-info">
+                        <div>
+                            <div class="hotel-title-wrap">
+                                <h4>台北 - 敦南金融商圈行政商旅</h4>
+                                <span class="rating">8.7 非常好</span>
+                            </div>
+                            <ul class="perks">
+                                <li>近金融集團總部</li>
+                                <li>房內獨立辦公區</li>
+                                <li>24H 膠囊咖啡吧</li>
+                            </ul>
+                            <p class="hotel-desc">位於金融重鎮，距離大型金控集團辦公大樓僅步行距離。房內提供穩定高速 Wi-Fi 與寬敞桌面，讓您專注處理財務報表無干擾。</p>
+                        </div>
+                        <div class="price-action">
+                            <div class="price-block">
+                                <span class="label">Trivago 全網最低價</span>
+                                <p class="amount">NT$ 3,180 <span style="font-size: 1rem; color: #888;">/晚</span></p>
+                            </div>
+                            <button class="btn-book" onclick="alert('導向 Trivago 比價轉換頁')">查看隱藏優惠</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 頁籤切換腳本 -->
+    <script>
+        function switchCategory(evt, categoryId) {
+            // 隱藏所有內容
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 移除所有按鈕的 active 狀態
+            const btns = document.querySelectorAll('.tab-btn');
+            btns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // 顯示選擇的內容並加上 active 狀態
+            document.getElementById(categoryId).classList.add('active');
+            evt.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>
