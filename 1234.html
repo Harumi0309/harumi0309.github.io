@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>免費領取：《2026 週末看風景提案》電子書與防雷影片</title>
+    <style>
+        /* Trivago 品牌色系與基礎設定 */
+        :root {
+            --trivago-blue: #007fad;
+            --trivago-red: #c94a38;
+            --trivago-yellow: #f48f00;
+            --text-dark: #333333;
+            --bg-light: #f7f9fa;
+        }
+        
+        * { box-sizing: border-box; font-family: 'Helvetica Neue', '微軟正黑體', Arial, sans-serif; }
+        body { margin: 0; padding: 0; background-color: var(--bg-light); color: var(--text-dark); line-height: 1.6; }
+        
+        /* 頂部導覽列 */
+        header { background: #fff; padding: 15px 20px; border-bottom: 2px solid #eaeaea; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        header h1 { margin: 0; font-size: 22px; color: var(--trivago-blue); letter-spacing: 1px; }
+
+        /* 主要內容區塊 */
+        .container { max-width: 1000px; margin: 40px auto; padding: 0 20px; }
+        .hero-section { display: flex; flex-wrap: wrap; background: #fff; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; }
+        
+        /* 左側：價值主張與圖片 */
+        .content-col { flex: 1; min-width: 320px; padding: 40px; background: #fff; }
+        .content-col h2 { color: var(--trivago-red); font-size: 2rem; margin-top: 0; line-height: 1.3; }
+        .content-col p.subtitle { font-size: 1.1rem; color: #555; margin-bottom: 25px; }
+        
+        .book-preview { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 30px; }
+        .book-cover { width: 140px; border-radius: 6px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: transform 0.3s; }
+        .book-cover:hover { transform: translateY(-5px); }
+        
+        .benefits-list { list-style: none; padding: 0; margin: 0; }
+        .benefits-list li { margin-bottom: 12px; font-size: 1.05rem; display: flex; align-items: flex-start; gap: 10px; }
+        .benefits-list li::before { content: "✅"; font-size: 1.2rem; }
+
+        /* 右側：表單填寫區 */
+        .form-col { flex: 1; min-width: 320px; padding: 40px; background: #fdfaf5; border-left: 2px dashed #f0e6d2; display: flex; flex-direction: column; justify-content: center; }
+        .form-box { background: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid var(--trivago-yellow); }
+        .form-box h3 { margin-top: 0; color: var(--trivago-blue); font-size: 1.4rem; text-align: center; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #444; }
+        .form-group input { width: 100%; padding: 14px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; transition: border-color 0.3s; }
+        .form-group input:focus { outline: none; border-color: var(--trivago-blue); box-shadow: 0 0 5px rgba(0, 127, 173, 0.2); }
+        
+        .btn-submit { background-color: var(--trivago-yellow); color: #fff; border: none; padding: 16px; font-size: 1.2rem; font-weight: bold; border-radius: 6px; cursor: pointer; width: 100%; transition: background 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-submit:hover { background-color: #d67d00; transform: translateY(-2px); }
+        
+        .privacy-note { font-size: 0.85rem; color: #888; text-align: center; margin-top: 15px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+
+        /* 成功訊息隱藏區塊 */
+        #success-message { display: none; text-align: center; padding: 40px 20px; background: #e8f5e9; border-radius: 10px; border: 1px solid #c8e6c9; margin-top: 20px; }
+        #success-message h3 { color: #2e7d32; font-size: 1.8rem; margin-top: 0; }
+
+        /* RWD 響應式設計 */
+        @media (max-width: 768px) {
+            .book-preview { flex-direction: column; align-items: center; text-align: center; }
+            .benefits-list li { text-align: left; }
+            .form-col { border-left: none; border-top: 2px dashed #f0e6d2; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>trivago 聰明旅遊情報站</h1>
+    </header>
+
+    <div class="container">
+        <div class="hero-section" id="main-content">
+            
+            <!-- 左側：價值傳遞區塊 -->
+            <div class="content-col">
+                <h2>別讓找飯店的焦慮，<br>毀了你週末放空的好心情！</h2>
+                <p class="subtitle">不要再開十幾個網頁比價了。立即下載全新電子書，教你用隱藏密技，3分鐘找出全網最低價的優質好房。</p>
+                
+                <div class="book-preview">
+                    <!-- 嵌入您剛才生成的 AI 封面圖片 -->
+                    <img src="watermarked_img_1164641595021864153.png" alt="2026 週末看風景提案電子書" class="book-cover">
+                    
+                    <ul class="benefits-list">
+                        <li><strong>3 大精選看風景路線：</strong> 適合一般機車輕鬆騎乘的私房秘境與周邊優質民宿推薦。</li>
+                        <li><strong>破解訂房 3 大陷阱：</strong> 識破假評價與魔鬼隱藏稅費，保證不當冤大頭。</li>
+                        <li><strong>附贈實戰教學影片：</strong> 獨家螢幕錄影，教你一步步開啟 Trivago 隱藏過濾器。</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 右側：表單蒐集區塊 -->
+            <div class="form-col">
+                <div class="form-box">
+                    <h3>📥 立即免費寄至您的信箱</h3>
+                    <form id="leadCaptureForm">
+                        <div class="form-group">
+                            <label for="firstName">您的稱呼 (怎麼稱呼您？)</label>
+                            <input type="text" id="firstName" placeholder="例：林先生 / Kevin" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="emailAddress">您的最佳 Email (電子書發送位置)</label>
+                            <input type="email" id="emailAddress" placeholder="example@email.com" required>
+                        </div>
+                        <button type="submit" class="btn-submit">免費索取電子書與影片</button>
+                        <div class="privacy-note">🔒 我們承諾 100% 尊重您的隱私，絕不發送垃圾郵件。</div>
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- 提交成功後的反饋畫面 -->
+        <div id="success-message">
+            <h3>🎉 太棒了！指南已成功寄出</h3>
+            <p><span id="display-name"></span> 您好，請立即前往您的 Email 信箱查收《2026 週末看風景提案》電子書與影片連結。</p>
+            <p style="color: #666; font-size: 0.9rem;">（如果您在 5 分鐘內沒有收到，請記得檢查一下「垃圾郵件」或「促銷內容」資料夾喔！）</p>
+        </div>
+    </div>
+
+    <!-- 簡單的互動腳本 -->
+    <script>
+        document.getElementById('leadCaptureForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // 防止頁面重新載入
+            
+            // 抓取使用者名稱
+            const userName = document.getElementById('firstName').value;
+            
+            // 隱藏主要內容，顯示成功訊息 (模擬頁面跳轉至 Thank You Page)
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('success-message').style.display = 'block';
+            document.getElementById('display-name').innerText = userName;
+            
+            // 在實務操作上，這裡會放入 Facebook Pixel 的 Lead 事件追蹤碼，以及將資料打給 Mailchimp/ConvertKit 的 API
+            console.log("已成功收集名單:", userName, document.getElementById('emailAddress').value);
+        });
+    </script>
+</body>
+</html>
